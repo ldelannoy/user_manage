@@ -41,23 +41,36 @@ unset($_POST['btnEnvoyer']);
 
 //echo '<pre>';
 //print_r($_POST);
-//exit;      
+//exit; 
+$data =  ['first_name' => $_POST['first_name'],
+'last_name' => $_POST['last_name'],
+'gender' => $_POST['gender'],
+'birthday' => $_POST['birthday'],
+'nationality' => $_POST['nationality'],
+'birth_country' => $_POST['birth_country'],
+'birth_city' => $_POST['birth_city'],
+'phone' => $_POST['phone'],
+'mobile' => $_POST['mobile'],
+'email' => $_POST['email']
+];   
+
+if($id){
+    $request =$pdo->prepare('update users set first_name= :first_name,last_name= :last_name,gender= :gender,birthday= :birthday,nationality= :nationality,birth_country= :birth_country,birth_city= :birth_city,phone= :phone,mobile= :mobile,email= :email where id= :id');// code...
+    $data['id']= $id;    
+
+
+}else{
 
 $request =$pdo->prepare('insert into users (first_name,last_name,gender,birthday,nationality,birth_country,birth_city,phone,mobile,email) values (:first_name,:last_name,:gender,:birthday,:nationality,:birth_country,:birth_city,:phone,:mobile,:email)');// code...
     
 
-$result = $request->execute(['first_name' => $_POST['first_name'],
-    'last_name' => $_POST['last_name'],
-    'gender' => $_POST['gender'],
-    'birthday' => $_POST['birthday'],
-    'nationality' => $_POST['nationality'],
-    'birth_country' => $_POST['birth_country'],
-    'birth_city' => $_POST['birth_city'],
-    'phone' => $_POST['phone'],
-    'mobile' => $_POST['mobile'],
-    'email' => $_POST['email']
-  ]);
+}
 
+$result = $request->execute($data);
+
+if($result === true){
+    header('location: edit.php');
+}
 }   
 //echo '<pre>';
 //print_r($_POST);
