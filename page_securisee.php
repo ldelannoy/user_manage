@@ -142,8 +142,8 @@ $nation = $result !== false ? $result : [];
         >XXXX</option> => XXXX le nom visible dans la liste deroulante de chaque pays
         -->
         <?php foreach($nation as $natio): ?>
-            <option value="<?= $natio['abbreviation_2'] ?>" 
-            <?= $user['nationality'] === $natio['abbreviation_2'] ? 'selected' : '' ?>
+            <option value="<?= $user['nationality'] === $natio['abbreviation_2'] ? 'selected' : $natio['abbreviation_2'] ?>" 
+            
             >
             <?= $natio['abbreviation_2'] ?>
           </option>
@@ -162,7 +162,7 @@ $nation = $result !== false ? $result : [];
         >XXXX</option> => XXXX le nom visible dans la liste deroulante de chaque pays
         -->
         <?php foreach($countries as $country): ?>
-          <option value="<?= $country['pays_fr'] ?>">
+          <option value="<?= $country['pays_fr'] ?>"  <?= $user['birth_country'] === $country['pays_fr'] ? 'selected' : '' ?>>
             <?= $country['pays_fr'] ?>
           </option>
         <?php endforeach ?>
