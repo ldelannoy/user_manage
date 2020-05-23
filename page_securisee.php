@@ -52,12 +52,16 @@ $data =  ['first_name' => $_POST['first_name'],
 'phone' => $_POST['phone'],
 'mobile' => $_POST['mobile'],
 'email' => $_POST['email']
-];   
+];  
+
+//var_dump($_GET['id']);
+//exit;
+
 
 if($id){
     $request =$pdo->prepare('update users set first_name= :first_name,last_name= :last_name,gender= :gender,birthday= :birthday,nationality= :nationality,birth_country= :birth_country,birth_city= :birth_city,phone= :phone,mobile= :mobile,email= :email where id= :id');// code...
-    $data['id']= $id;    
-
+    $data['id']= $id;   
+   
 
 }else{
 
@@ -138,7 +142,9 @@ $nation = $result !== false ? $result : [];
         >XXXX</option> => XXXX le nom visible dans la liste deroulante de chaque pays
         -->
         <?php foreach($nation as $natio): ?>
-          <option value="<?= $natio['abbreviation_2'] ?>">
+            <option value="<?= $natio['abbreviation_2'] ?>" 
+            <?= $user['nationality'] === $natio['abbreviation_2'] ? 'selected' : '' ?>
+            >
             <?= $natio['abbreviation_2'] ?>
           </option>
         <?php endforeach ?>
